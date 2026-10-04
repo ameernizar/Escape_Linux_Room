@@ -1,0 +1,7 @@
+#!/usr/bin/env python3
+"""Fake shell used only by isolated gateway tests; does not invoke Podman."""
+import sys
+if sys.argv[1:2] != ["exec"]:
+    raise SystemExit("Only mock exec is supported")
+for line in sys.stdin:
+    print("/home/player",flush=True)

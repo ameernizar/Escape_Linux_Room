@@ -5,7 +5,7 @@ Competition-grade Linux escape room for 20–30 teams, designed for a single LAN
 ## Quick start (development)
 
 1. Copy `.env.example` to `.env` and set strong `SECRET_KEY` and `ADMIN_BOOTSTRAP_PASSWORD` values.
-2. Run `docker compose up --build`.
+2. Run `docker compose up --build`. For an explicitly local, single-machine terminal trial only, add `-f docker-compose.dev.yml`; its Docker socket mount is forbidden for event deployment.
 3. Open `http://localhost:8000/docs`; bootstrap the organizer with `POST /api/v1/admin/bootstrap`.
 
 This repository implements the competition control plane and deterministic six-door challenge generator. The terminal proxy is deliberately an integration boundary: it must be connected to a reviewed container-runtime adapter before an event. See [DEPLOYMENT.md](DEPLOYMENT.md) and [SECURITY.md](SECURITY.md).

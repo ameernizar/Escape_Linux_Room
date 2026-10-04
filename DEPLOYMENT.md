@@ -16,4 +16,4 @@ Run this on a dedicated, patched Linux server on the event LAN. Do not expose th
 4. Place Caddy/Nginx in front of the API with TLS, request-size limits and rate limits. Permit only LAN CIDRs.
 5. Load-test at 40 fake teams, rehearse reset and database restore, then freeze image digests/configuration.
 
-The provided Compose service is control-plane only. A runtime adapter is intentionally not shipped because unsafe Docker socket access would violate the platform threat model.
+The provided Compose service is control-plane only. `docker-compose.dev.yml` adds the reference terminal gateway for a local single-machine trial, but its raw Docker socket mount is prohibited for an event. Production must place the gateway behind the separately scoped runtime worker described in `runtime-worker/README.md`.

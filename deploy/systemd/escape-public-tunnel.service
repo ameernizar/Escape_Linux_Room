@@ -1,0 +1,18 @@
+[Unit]
+Description=Escape Linux Room temporary public HTTPS tunnel
+After=network-online.target escape-frontend.service
+Wants=network-online.target escape-frontend.service
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+WorkingDirectory=/home/ameer/Documents/Escape_Linux_Room
+ExecStart=/home/ameer/Documents/Escape_Linux_Room/deploy/bin/cloudflared tunnel --no-autoupdate --edge-ip-version 4 --protocol http2 --url http://127.0.0.1:5173
+Restart=always
+RestartSec=10
+NoNewPrivileges=true
+PrivateTmp=true
+TimeoutStopSec=20
+
+[Install]
+WantedBy=default.target

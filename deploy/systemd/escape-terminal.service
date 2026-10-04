@@ -1,0 +1,21 @@
+[Unit]
+Description=Escape Linux Room rootless terminal worker
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+WorkingDirectory=/home/ameer/Documents/Escape_Linux_Room
+EnvironmentFile=/home/ameer/Documents/Escape_Linux_Room/.env
+Environment=PYTHONPATH=/home/ameer/Documents/Escape_Linux_Room
+Environment=PATH=/home/ameer/.nvm/versions/node/v22.22.1/bin:/usr/local/bin:/usr/bin:/bin
+ExecStartPre=/bin/bash /home/ameer/Documents/Escape_Linux_Room/scripts/restore-team-containers.sh
+ExecStart=/home/ameer/.nvm/versions/node/v22.22.1/bin/node /home/ameer/Documents/Escape_Linux_Room/terminal-gateway-rootless/server-fixed.mjs
+Restart=always
+RestartSec=5
+TimeoutStartSec=180
+TimeoutStopSec=15
+
+[Install]
+WantedBy=default.target

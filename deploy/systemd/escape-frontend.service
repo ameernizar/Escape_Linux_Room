@@ -1,0 +1,18 @@
+[Unit]
+Description=Escape Linux Room built frontend and API proxy
+After=network-online.target escape-terminal.service
+Wants=network-online.target escape-terminal.service
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+WorkingDirectory=/home/ameer/Documents/Escape_Linux_Room
+Environment=FRONTEND_PORT=5173
+ExecStart=/home/ameer/.nvm/versions/node/v22.22.1/bin/node /home/ameer/Documents/Escape_Linux_Room/scripts/serve-frontend.mjs
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+TimeoutStopSec=15
+
+[Install]
+WantedBy=default.target

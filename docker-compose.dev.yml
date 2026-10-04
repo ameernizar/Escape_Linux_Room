@@ -1,0 +1,10 @@
+# Development-only terminal bridge. Never use this raw Docker-socket mount on event day.
+services:
+  terminal-gateway:
+    build: ./terminal-gateway
+    environment:
+      SECRET_KEY: ${SECRET_KEY}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports: ["8080:8080"]
+    depends_on: [api]

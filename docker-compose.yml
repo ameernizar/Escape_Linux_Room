@@ -2,7 +2,10 @@ services:
   api:
     build: ./backend
     env_file: .env
-    ports: ["8000:8000"]
+    environment:
+      TERMINAL_WORKER_SOCKET: /run/escape-terminal/worker.sock
+    volumes: ["./terminal-gateway-rootless/run:/run/escape-terminal:ro"]
+    ports: ["127.0.0.1:8000:8000"]
     depends_on:
       db:
         condition: service_healthy
