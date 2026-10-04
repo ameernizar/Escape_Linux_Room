@@ -181,7 +181,7 @@ def terminal_access(x_worker_key:str=Header(default=""),db:Session=Depends(db_se
 def terminal_ticket(user:User=Depends(current),db:Session=Depends(db_session)):
     """Short lived, team-bound credential consumed by the terminal gateway only."""
     playing_team(db,user)
-    claims={"sub":str(user.id),"team":user.tewam_id,"scope":"terminal","jti":secrets.token_urlsafe(16),"exp":datetime.now(timezone.utc)+timedelta(minutes=1)}
+    claims={"sub":str(user.id),"team":user.team_id,"scope":"terminal","jti":secrets.token_urlsafe(16),"exp":datetime.now(timezone.utc)+timedelta(minutes=1)}
     return {"ticket":jwt.encode(claims,settings.secret_key,algorithm="HS256"),"expires_in":60}
 @app.websocket("/ws/terminal")
 async def terminal_unconfigured(ws:WebSocket, ticket:str):
